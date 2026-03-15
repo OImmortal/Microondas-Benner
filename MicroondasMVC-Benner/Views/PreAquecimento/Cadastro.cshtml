@@ -1,0 +1,51 @@
+﻿@model MicroondasMVC_Benner.Models.PreAquecimento.PreAquecimentoModel
+
+@{
+    ViewData["Title"] = "Cadastro de Programa";
+}
+
+<div class="container mt-5">
+    <h2>Cadastrar Novo Programa Customizado</h2>
+    <hr />
+
+    @if (ViewBag.Mensagem != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Mensagem</div>
+    }
+
+    <form asp-controller="PreAquecimento" method="post">
+
+        <div class="mb-3">
+            <label class="form-label">Nome do Programa</label>
+            <input type="text" asp-for="Nome" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Alimento</label>
+            <input type="text" asp-for="Alimento" class="form-control" placeholder="Ex: Pipoca, Sopa..." required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Tempo (segundos)</label>
+            <input type="number" asp-for="Tempo" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Potencia</label>
+            <input type="number" asp-for="Potencia" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Caracter de Aquecimento</label>
+            <input maxlength="1" type="text" asp-for="CaractereAquecimento" class="form-control" placeholder="Ex: * para representar o aquecimento" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Caracter de Aquecimento</label>
+            <textarea asp-for="InstrucoesComplementares" class="form-control" rows="3" placeholder="Descrição..."></textarea>
+        </div>
+
+        <button asp-action="Cadastro" type="submit" class="btn btn-success">Salvar Programa</button>
+        <a asp-controller="MicroOndas" asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

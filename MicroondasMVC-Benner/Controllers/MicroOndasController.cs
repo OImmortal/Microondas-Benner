@@ -44,6 +44,13 @@ namespace MicroondasMVC_Benner.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public IActionResult CriarNovoItem()
+        {
+            return RedirectToAction("Cadastro", "PreAquecimento");
+        }
+
+
         public IActionResult Index()
         {
             

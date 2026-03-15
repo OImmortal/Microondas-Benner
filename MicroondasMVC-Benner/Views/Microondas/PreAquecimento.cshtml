@@ -7,20 +7,21 @@
             {
                 <button asp-action="IniciarPreAquecimento" name="idPreAquecimento" value=@preAquecimento.id type="@(!Model.PreAquecimentoActive ? "submit" : "button")" class="card border-primary m-1 flex-shrink-0 col-3 card-interativo">
                     <div class="card-body p-2">
-                        <h6 class="card-title text-primary mb-1">@preAquecimento.Alimento</h6>
+                        <h6 style="@(preAquecimento.NovoItem ? "font-style: italic;" : null)" class= "card-title text-primary mb-1" > @preAquecimento.Alimento</h6>
 
                         <div class="d-flex justify-content-between small text-muted mb-1">
                             <span>Tempo: @preAquecimento.ObterTempoFormatado()</span>
                             <span>Pot: @preAquecimento.Potencia</span>
                         </div>
 
-                        <p class="card-text mb-0 text-truncate">
+                        <p class="card-text mb-0 text-lg-start">
                             @preAquecimento.InstrucoesComplementares
                         </p>
                     </div>
                 </button>
             }
         </div>
+        <button asp-action="CriarNovoItem" class="btn btn-primary">Criar Novo +</button>
     </form>
 </div>
 

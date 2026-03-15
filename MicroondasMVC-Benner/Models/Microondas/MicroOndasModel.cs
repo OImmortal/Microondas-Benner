@@ -1,6 +1,8 @@
 ﻿using MicroondasMVC_Benner.Models.PreAquecimento;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using NuGet.Packaging;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
 
 namespace MicroondasMVC_Benner.Models.Microondas
 {
@@ -28,6 +30,35 @@ namespace MicroondasMVC_Benner.Models.Microondas
                 new PreAquecimentoModel(4, "Frango (qualquer corte)", "Frango", 480, 7, "$", "Interrompa o processo na metade e vire o conteúdo com a parte de baixo para cima para o descongelamento uniforme."),
                 new PreAquecimentoModel(5, "Feijão congelado", "Feijão", 480, 9, "%", "Deixe o recipiente destampado e em casos de plástico, cuidado ao retirar o recipiente pois o mesmo pode perder resistência em altas temperaturas."),
             };
+
+            List<PreAquecimentoModel> preAquecimentosAdicionados = new List<PreAquecimentoModel>();
+
+            string caminhoJson = Path.Combine("Config", "PreAquecimentoItens.Json");
+
+            if(File.Exists(caminhoJson))
+            {
+                string conteudo = File.ReadAllText(caminhoJson);
+
+                if (conteudo == "")
+                {
+                    return;
+                }
+
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                List<PreAquecimentoModel> aquecimentos = JsonSerializer.Deserialize<List<PreAquecimentoModel>>(conteudo, options)!;
+                if (aquecimentos != null)
+                {
+                    foreach (PreAquecimentoModel preAquecimento in aquecimentos)
+                    {
+                        preAquecimentos.Add(preAquecimento);
+                    }
+                }
+            }
         }
 
         public void IniciarPreAquecimento(int idPreAquecimento)
@@ -121,6 +152,12 @@ namespace MicroondasMVC_Benner.Models.Microondas
             }
 
             return "00:00";
+        }
+
+        public bool ContainsCaracter(string caracter)
+        {
+            bool contains = preAquecimentos.Any(p => p.CaractereAquecimento == caracter) || caracter == ".";
+            return contains;
         }
 
         private List<Blocos> gerarBloco(string caracter = "")

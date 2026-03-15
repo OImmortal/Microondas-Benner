@@ -5,7 +5,7 @@ namespace MicroondasMVC_Benner.Models.PreAquecimento
 {
     public class PreAquecimentoModel
     {
-        [Required]
+
         public int id { get; set; }
         [Required]
         public string? Nome { get; set; }
@@ -20,9 +20,26 @@ namespace MicroondasMVC_Benner.Models.PreAquecimento
         [Required]
         public string? InstrucoesComplementares { get; set; }
 
+        public bool NovoItem { get; set; } = false;
+
+        public PreAquecimentoModel()
+        {
+            
+        }
+
         public PreAquecimentoModel(int id, string nome, string alimento, int tempo, int potencia, string CaractereAquecimento, string desc)
         {
             this.id = id;
+            this.Nome = nome;
+            this.Alimento = alimento;
+            this.Tempo = tempo;
+            this.Potencia = potencia;
+            this.CaractereAquecimento = CaractereAquecimento;
+            this.InstrucoesComplementares = desc;
+        }
+
+        public PreAquecimentoModel(string nome, string alimento, int tempo, int potencia, string CaractereAquecimento, string desc)
+        {
             this.Nome = nome;
             this.Alimento = alimento;
             this.Tempo = tempo;
