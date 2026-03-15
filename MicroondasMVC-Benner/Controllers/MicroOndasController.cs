@@ -1,4 +1,5 @@
-﻿using MicroondasMVC_Benner.Models;
+﻿using MicroondasMVC_Benner.Models.Microondas;
+using MicroondasMVC_Benner.Models.PreAquecimento;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
 using static System.Reflection.Metadata.BlobBuilder;
@@ -8,6 +9,15 @@ namespace MicroondasMVC_Benner.Controllers
     public class MicroOndasController : Controller
     {
         public static MicroOndasModel microOndas = new MicroOndasModel();
+
+        [HttpPost]
+        public IActionResult IniciarPreAquecimento(int idPreAquecimento)
+        {
+            microOndas.IniciarPreAquecimento(idPreAquecimento);
+            return RedirectToAction("Index");
+        }
+
+
 
         [HttpPost]
         public IActionResult Iniciar(int contador, int potencia)

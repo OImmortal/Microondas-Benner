@@ -8,6 +8,23 @@
     background-color: #090909;
 }
 
-body {
-    overflow: hidden;
+.visor-text {
+    font-size: 1em;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.card-interativo {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.card-interativo:hover {
+    transform: translateY(-3px); 
+    box-shadow: 0 4px 8px rgba(0,0,128,0.15);  
+    background-color: #f8f9fa; 
+}
+
+.card-interativo:active {
+    transform: translateY(0);
+    box-shadow: none;
 }

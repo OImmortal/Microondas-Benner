@@ -1,4 +1,4 @@
-﻿namespace MicroondasMVC_Benner.Models
+﻿namespace MicroondasMVC_Benner.Models.Microondas
 {
     public class Display
     {

@@ -1,73 +1,18 @@
-﻿@model MicroondasMVC_Benner.Models.MicroOndasModel
+﻿@model MicroondasMVC_Benner.Models.Microondas.MicroOndasModel
 
 @{
     ViewData["Title"] = "Pagina Inicial";
 }
 
 <div class="row justify-content-center">
-    
     <partial name="Teclado" />
 
     <partial name="Visor" />
 
+    <partial name="PreAquecimento"/>
 </div>
 
 
 
 
-<script>
 
-
-    function valorMaximo(dispOuPotencia) {
-        let display = document.getElementById("display");
-        let potencia = document.getElementById("potencia");
-
-        if (dispOuPotencia === display) {
-            if(display.value >= 120) {
-                return true;
-            }
-        }
-
-        if (dispOuPotencia === potencia) {
-            if(potencia.value >= 10) {
-                return true;
-            }
-        }
-
-        return false;
-
-    }
-
-    function adicionarValor(value) {
-        // Pegar os elementos de display e potencia
-
-        let display = document.getElementById("display");
-        let potencia = document.getElementById("potencia");
-
-        // Verificar qual campo está ativo
-        let campoAtivo = document.activeElement === potencia ? potencia : document.activeElement === display ? display : null;
-       
-        if(campoAtivo !== null) {
-            // Logia para verificar se o falor do display ou potencia é 0, se for ele substitui o valor, caso contrário ele concatena o valor
-            let campoValor = campoAtivo.value;
-            let tempValue = campoValor + value.toString();
-        
-            if (campoValor === "0" || campoValor === "") {
-                if(valorMaximo(campoAtivo) === false) {
-                    campoValor = value.toString(); // Atualiza a variável local
-                } else campoValor = campoAtivo == display ? "120" : "10";
-            } else {
-                if(valorMaximo(campoAtivo) === false) {
-                    campoValor += value.toString(); // Concatena na variável local
-                } else campoValor = campoAtivo == display ? "120" : "10"; // Define o valor máximo diretamente
-            }
-            // Atualiza o valor do campo 
-            campoAtivo.value = campoValor;
-        }
-        
-            
-    }
-
-    
-
-</script>

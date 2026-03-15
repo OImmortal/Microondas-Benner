@@ -1,11 +1,12 @@
-﻿@model MicroondasMVC_Benner.Models.MicroOndasModel
+﻿@model MicroondasMVC_Benner.Models.Microondas.MicroOndasModel
+@using MicroondasMVC_Benner.Models.Microondas
 
 <div class="p-2 w-50 visor">
     <h2 id="tempoDisplay">@Model.ObterTempoFormatado()</h2>
-    <h4 id="containerBlocos">
+    <h4 id="containerBlocos" class="visor-text">
         @foreach (var bloco in Model.blocos ?? new List<Blocos>())
         {
-            <span style="color: yellow">@bloco.BlocoCompleto</span>
+            <span  style="color: yellow">@bloco.BlocoCompleto</span>
         }
     </h4>
 </div>
@@ -15,7 +16,7 @@
 </form>
 
 <script>
-    let tempoRestante = @(Model.display?.contador ?? 0)
+    let tempoRestante = @(Model.display?.contador ?? 0);
     let ligado = '@Model.Ligado' === 'True';
     let Pausado = '@Model.Pausado' === 'True';
     let blocos = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.blocos ?? new List<Blocos>()));

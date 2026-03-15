@@ -1,0 +1,35 @@
+﻿@model MicroondasMVC_Benner.Models.Microondas.MicroOndasModel
+
+<div class="p-2 w-75">
+    <form asp-controller="Microondas" method="post">
+        <div class="d-flex flex-nowrap overflow-auto pb-3">
+            @foreach (var preAquecimento in Model.preAquecimentos)
+            {
+                <button asp-action="IniciarPreAquecimento" name="idPreAquecimento" value=@preAquecimento.id type="@(!Model.PreAquecimentoActive ? "submit" : "button")" class="card border-primary m-1 flex-shrink-0 col-3 card-interativo">
+                    <div class="card-body p-2">
+                        <h6 class="card-title text-primary mb-1">@preAquecimento.Alimento</h6>
+
+                        <div class="d-flex justify-content-between small text-muted mb-1">
+                            <span>Tempo: @preAquecimento.ObterTempoFormatado()</span>
+                            <span>Pot: @preAquecimento.Potencia</span>
+                        </div>
+
+                        <p class="card-text mb-0 text-truncate">
+                            @preAquecimento.InstrucoesComplementares
+                        </p>
+                    </div>
+                </button>
+            }
+        </div>
+    </form>
+</div>
+
+<script>
+    function selecionarPrograma(alimento, tempo, potencia, caracter) {
+        let display = document.getElementById("display");
+        let potenciaInput = document.getElementById("potencia");
+        
+        display.value = tempo;
+        potenciaInput.value = potencia;
+    }
+</script>
