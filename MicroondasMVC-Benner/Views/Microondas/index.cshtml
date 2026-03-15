@@ -1,0 +1,91 @@
+﻿@model MicroondasMVC_Benner.Models.MicroOndasModel
+
+<form asp-controller="Microondas" method="post">
+    <div class="painel p-2 w-25 min-vh-100">
+        <div class="d-flex flex-column justify-content-center align-items-start">
+            <label type="number" class="form-check-label" style="color: white">Tempo:</label>
+            <input min="1" max="120" type="number" class="form-control" id="display" name="contador" value="@Model.display!.contador" />
+            <br />
+            <label type="number" class="" style="color: yellow">Potencia:</label>
+            <input min="1" max="10" id="potencia" type="number" class="form-control form-control-color" name="potencia" value="@Model.display!.potencia" />
+        </div>
+        <br />
+        <div class="align-content-center justify-content-center p-2">
+            <div class="row row-cols-3 g-3">
+                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(1)" class="btn btn-light w-100">1</button></div>
+                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(2)" class="btn btn-light w-100">2</button></div>
+                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(3)" class="btn btn-light w-100">3</button></div>
+
+                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(4)" class="btn btn-light w-100">4</button></div>
+                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(5)" class="btn btn-light w-100">5</button></div>
+                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(6)" class="btn btn-light w-100">6</button></div>
+                                         
+                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(7)" class="btn btn-light w-100">7</button></div>
+                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(8)" class="btn btn-light w-100">8</button></div>
+                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(9)" class="btn btn-light w-100">9</button></div>
+
+                <div class="col"><button asp-action="Iniciar" type="submit" class="btn btn-success w-100">Iniciar</button></div>
+                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(0)" class="btn btn-light w-100">0</button></div>
+                <div class="col"><button class="btn btn-danger w-100">Cancelar</button></div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+<script>
+
+
+    function valorMaximo(dispOuPotencia) {
+        let display = document.getElementById("display");
+        let potencia = document.getElementById("potencia");
+
+        if (dispOuPotencia === display) {
+            if(display.value >= 120) {
+                return true;
+            }
+        }
+
+        if (dispOuPotencia === potencia) {
+            if(potencia.value >= 10) {
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+
+    function adicionarValor(value) {
+        // Pegar os elementos de display e potencia
+
+        let display = document.getElementById("display");
+        let potencia = document.getElementById("potencia");
+
+        // Verificar qual campo está ativo
+        let campoAtivo = document.activeElement === potencia ? potencia : document.activeElement === display ? display : null;
+       
+        if(campoAtivo !== null) {
+            // Logia para verificar se o falor do display ou potencia é 0, se for ele substitui o valor, caso contrário ele concatena o valor
+            let campoValor = campoAtivo.value;
+            let tempValue = campoValor + value.toString();
+        
+            if (campoValor === "0" || campoValor === "") {
+                if(valorMaximo(campoAtivo) === false) {
+                    campoValor = value.toString(); // Atualiza a variável local
+                } else campoValor = campoAtivo == display ? "120" : "10";
+            } else {
+                if(valorMaximo(campoAtivo) === false) {
+                    campoValor += value.toString(); // Concatena na variável local
+                } else campoValor = campoAtivo == display ? "120" : "10"; // Define o valor máximo diretamente
+            }
+            // Atualiza o valor do campo 
+            campoAtivo.value = campoValor;
+        }
+        
+            
+    }
+
+    
+
+</script>
