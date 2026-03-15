@@ -1,37 +1,19 @@
 ﻿@model MicroondasMVC_Benner.Models.MicroOndasModel
 
-<form asp-controller="Microondas" method="post">
-    <div class="painel p-2 w-25 min-vh-100">
-        <div class="d-flex flex-column justify-content-center align-items-start">
-            <label type="number" class="form-check-label" style="color: white">Tempo:</label>
-            <input min="1" max="120" type="number" class="form-control" id="display" name="contador" value="@Model.display!.contador" />
-            <br />
-            <label type="number" class="" style="color: yellow">Potencia:</label>
-            <input min="1" max="10" id="potencia" type="number" class="form-control form-control-color" name="potencia" value="@Model.display!.potencia" />
-        </div>
-        <br />
-        <div class="align-content-center justify-content-center p-2">
-            <div class="row row-cols-3 g-3">
-                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(1)" class="btn btn-light w-100">1</button></div>
-                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(2)" class="btn btn-light w-100">2</button></div>
-                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(3)" class="btn btn-light w-100">3</button></div>
+@{
+    ViewData["Title"] = "Pagina Inicial";
+}
 
-                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(4)" class="btn btn-light w-100">4</button></div>
-                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(5)" class="btn btn-light w-100">5</button></div>
-                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(6)" class="btn btn-light w-100">6</button></div>
-                                         
-                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(7)" class="btn btn-light w-100">7</button></div>
-                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(8)" class="btn btn-light w-100">8</button></div>
-                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(9)" class="btn btn-light w-100">9</button></div>
+<div class="row justify-content-center">
+    
+    <partial name="Teclado" />
 
-                <div class="col"><button asp-action="Iniciar" type="submit" class="btn btn-success w-100">Iniciar</button></div>
-                <div class="col"><button type="button" onmousedown="event.preventDefault()" onclick="adicionarValor(0)" class="btn btn-light w-100">0</button></div>
-                <div class="col"><button class="btn btn-danger w-100">Cancelar</button></div>
-            </div>
+    <partial name="Visor" />
 
-        </div>
-    </div>
-</form>
+</div>
+
+
+
 
 <script>
 

@@ -3,6 +3,11 @@
     color: #fff;
 }
 
+.visor {
+    color: #4cff00;
+    background-color: #090909;
+}
+
 body {
     overflow: hidden;
 }

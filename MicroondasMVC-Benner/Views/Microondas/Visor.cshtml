@@ -1,0 +1,72 @@
+﻿@model MicroondasMVC_Benner.Models.MicroOndasModel
+
+<div class="p-2 w-50 visor">
+    <h2 id="tempoDisplay">@Model.ObterTempoFormatado()</h2>
+    <h4 id="containerBlocos">
+        @foreach (var bloco in Model.blocos ?? new List<Blocos>())
+        {
+            <span style="color: yellow">@bloco.BlocoCompleto</span>
+        }
+    </h4>
+</div>
+
+<form asp-controller="Microondas" asp-action="Cancelar" method="post" style="display: none;">
+    <button type="submit" id="btnSubmitEscondido" style="display: none;"></button>
+</form>
+
+<script>
+    let tempoRestante = @(Model.display?.contador ?? 0)
+    let ligado = '@Model.Ligado' === 'True';
+    let Pausado = '@Model.Pausado' === 'True';
+    let blocos = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.blocos ?? new List<Blocos>()));
+
+    console.log(ligado && tempoRestante >= 0)
+
+    if (ligado && !Pausado && tempoRestante >= 0) {
+        let intervalo = setInterval(function () {
+            tempoRestante--;
+
+            // Calcula minutos e segundos no JS
+            let minutos = Math.floor(tempoRestante / 60);
+            let segundos = tempoRestante % 60;
+
+            // Formata para ficar "00:00"
+            let textoTempo =
+                minutos.toString().padStart(2, '0') + ':' +
+                segundos.toString().padStart(2, '0');
+
+            // Atualiza a tela
+            document.getElementById("tempoDisplay").innerText = textoTempo;
+            document.getElementById("display").value = tempoRestante;
+
+
+            if(blocos.length > 0) {
+                let ultimoIndice = blocos.length - 1;
+
+                blocos.pop(); // Remove o último objeto da lista se a string
+
+                // Atualiza a lista de blocos na tela
+                let htmlAtualizado = "";
+
+                // Percorre a lista atualizada no JS e monta as tags <span> novamente
+                blocos.forEach(function(b) {
+                    htmlAtualizado += `<span style="color: yellow">${b.BlocoCompleto}</span> `;
+                });
+
+                document.getElementById("containerBlocos").innerHTML = htmlAtualizado;
+            }
+
+            // Quando chegar a zero, para o cronômetro
+            if (tempoRestante <= 0) {
+                clearInterval(intervalo);
+                alert("Aquecimento concluído")
+                document.getElementById("btnSubmitEscondido").click();
+                return;
+            }
+
+
+        }, 1000); // 1000 milissegundos = 1 segundo
+
+    }
+
+</script>
