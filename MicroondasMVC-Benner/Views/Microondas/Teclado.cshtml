@@ -5,8 +5,10 @@
         <label type="number" class="form-check-label" style="color: white">Tempo:</label>
         <input min="0" max="120" type="number" class="form-control" id="display" name="contador" value="@Model.display!.contador" @(!Model.Ligado ? "" : "readonly") />
         <br />
-        <label type="number" class="" style="color: yellow">Potencia:</label>
-        <input min="0" max="10" id="potencia" type="number" class="form-control form-control-color" name="potencia" value="@Model.display!.potencia" @(!Model.Ligado ? "" : "readonly") />
+        <div class="col-md-6 mb-3">
+            <label type="number" class="" style="color: yellow">Potencia:</label>
+            <input min="0" max="10" id="potencia" type="number" class="form-control form-control-color" name="potencia" value="@Model.display!.potencia" @(!Model.Ligado ? "" : "readonly") />
+        </div>
     </div>
     <br />
     <div class="align-content-center justify-content-center p-2">

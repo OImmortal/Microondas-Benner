@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
 using static System.Reflection.Metadata.BlobBuilder;
 
-namespace MicroondasMVC_Benner.Controllers
+namespace MicroondasMVC_Benner.Controllers.Web
 {
     public class MicroOndasController : Controller
     {

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.IO;
 
-namespace MicroondasMVC_Benner.Controllers
+namespace MicroondasMVC_Benner.Controllers.Web
 {
     public class PreAquecimentoController : Controller
     {
