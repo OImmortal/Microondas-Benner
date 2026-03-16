@@ -1,7 +1,9 @@
 using DotNetEnv;
 using MicroondasMVC_Benner;
+using MicroondasMVC_Benner.Middleware;
 using MicroondasMVC_Benner.Models.API;
 using MicroondasMVC_Benner.Repository.Auth;
+using MicroondasMVC_Benner.Repository.MicroOndas;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -32,6 +34,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(decryptedConn));
 
 builder.Services.AddScoped<IAuthInterface, AuthService>();
+builder.Services.AddScoped<IMicroOndasInterface, MicroOndasService>();
 
 var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
 
@@ -54,6 +57,8 @@ builder.Services.AddAuthentication(x =>
 });
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

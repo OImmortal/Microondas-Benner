@@ -1,11 +1,13 @@
 ﻿using MicroondasMVC_Benner.Models.Microondas;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace MicroondasMVC_Benner.Models.PreAquecimento
 {
     public class PreAquecimentoModel
     {
 
+        [JsonIgnore]
         public int id { get; set; }
         [Required]
         public string? Nome { get; set; }
@@ -17,9 +19,8 @@ namespace MicroondasMVC_Benner.Models.PreAquecimento
         public int Potencia { get; set; }
         [Required]
         public string? CaractereAquecimento { get; set; }
-        [Required]
         public string? InstrucoesComplementares { get; set; }
-
+        [JsonIgnore]
         public bool NovoItem { get; set; } = false;
 
         public PreAquecimentoModel()

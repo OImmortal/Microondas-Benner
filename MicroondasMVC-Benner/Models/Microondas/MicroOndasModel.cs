@@ -18,7 +18,7 @@ namespace MicroondasMVC_Benner.Models.Microondas
         public string? ResultTXT { get; set; }
 
         private const int LIMITE_CONTADOR = 120;
-        private string tempCaracterAquecimento = "";
+        private string tempCaracterAquecimento = ".";
 
         public MicroOndasModel()
         {
