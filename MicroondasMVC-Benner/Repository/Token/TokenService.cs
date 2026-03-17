@@ -1,4 +1,4 @@
-﻿using MicroondasMVC_Benner.Models.API;
+using MicroondasMVC_Benner.Models.API;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -8,6 +8,7 @@ namespace MicroondasMVC_Benner.Repository.Token
 {
     public class TokenService
     {
+        // Gera um JWT simples com algumas claims básicas e expiração curta.
         public static string GenerateToken(UserAuthModel userModel, string secretKey)
         {
             var tokenHandler = new JwtSecurityTokenHandler();

@@ -1,4 +1,4 @@
-﻿using MicroondasMVC_Benner.Models.API;
+using MicroondasMVC_Benner.Models.API;
 using MicroondasMVC_Benner.Repository.Token;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
@@ -12,12 +12,14 @@ namespace MicroondasMVC_Benner.Repository.Auth
         private readonly ApplicationDbContext _context;
         private readonly IConfiguration _configuration;
 
+        // Sobe o serviço já com acesso ao banco e às configs do JWT.
         public AuthService(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;
         }
 
+        // Cria usuário novo no banco já com a senha hash.
         public async Task<UserAuthModel> CadastrarUser(UserAuthModel user)
         {
             try
@@ -45,6 +47,7 @@ namespace MicroondasMVC_Benner.Repository.Auth
 
 
 
+        // Valida usuário/senha e, se bater, gera um token JWT pra sessão.
         public async Task<string> Login(UserAuthModel user)
         {
             try
@@ -68,6 +71,7 @@ namespace MicroondasMVC_Benner.Repository.Auth
   
         }
 
+        // Faz o hash da senha do jeito que o sistema espera comparar depois.
         private string HashPasswordWithSHA1(string input)
         {
             using (SHA1 sha1 = SHA1.Create())

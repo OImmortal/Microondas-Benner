@@ -1,4 +1,4 @@
-﻿using Humanizer;
+using Humanizer;
 using System;
 
 namespace MicroondasMVC_Benner.Middleware
@@ -11,6 +11,7 @@ namespace MicroondasMVC_Benner.Middleware
         public string? StackTrace { get; set; }
         public string? Outros { get; set; }
 
+        // Monta uma string amigável pra salvar no log em arquivo.
         public string toString()
         {
             string contudo = $"--- ERRO REGISTRADO EM: {DateTime.Now} ---\n" +

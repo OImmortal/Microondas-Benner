@@ -1,4 +1,4 @@
-﻿using MicroondasMVC_Benner.Models.API;
+using MicroondasMVC_Benner.Models.API;
 using System.Net;
 using System.Text.Json;
 
@@ -9,12 +9,14 @@ namespace MicroondasMVC_Benner.Middleware
         private readonly RequestDelegate _next;
         private readonly ILogger<ExceptionHandlingMiddleware> _logger;
 
+        // Middleware central pra capturar exceções e padronizar log/retorno.
         public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
         {
             _next = next;
             _logger = logger;
         }
 
+        // Deixa a request seguir e, se algo estourar (ou for marcado pra log), registra e responde.
         public async Task InvokeAsync(HttpContext context)
         {
             try
@@ -33,6 +35,7 @@ namespace MicroondasMVC_Benner.Middleware
             }
         }
 
+        // Joga o detalhe do erro num arquivo diário pra facilitar o debug depois.
         private async Task SalvarLogNoArquivoAsync(Exception exception)
         {
             string pastaLogs = "Logs";
@@ -58,6 +61,7 @@ namespace MicroondasMVC_Benner.Middleware
             await File.AppendAllTextAsync(pathLog, conteudoLog);
         }
 
+        // Monta uma resposta JSON padrão quando uma exceção vaza pra fora.
         private async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = "application/json";

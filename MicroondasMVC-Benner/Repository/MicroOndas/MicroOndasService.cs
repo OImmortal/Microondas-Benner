@@ -1,4 +1,4 @@
-﻿using MicroondasMVC_Benner.Models.API;
+using MicroondasMVC_Benner.Models.API;
 using MicroondasMVC_Benner.Models.Microondas;
 using MicroondasMVC_Benner.Models.PreAquecimento;
 using System.Text.Json;
@@ -10,6 +10,7 @@ namespace MicroondasMVC_Benner.Repository.MicroOndas
 
         public static MicroOndasModel microOndas = new MicroOndasModel();
 
+        // Cadastra um preset de pré-aquecimento (valida regras e persiste no JSON).
         public PreAquecimentoModel? CadastrarPreAquecimento(PreAquecimentoModel model)
         {
             try
@@ -58,6 +59,7 @@ namespace MicroondasMVC_Benner.Repository.MicroOndas
             }
         }
 
+        // Inicia o aquecimento normal; se já estiver rodando, a ideia é somar/ajustar com os parâmetros.
         public MicroOndasModel? IniciarOuAdicionar(int? Tempo, int? Potencia)
         {
             try
@@ -79,6 +81,7 @@ namespace MicroondasMVC_Benner.Repository.MicroOndas
 
         }
 
+        // Busca um preset pelo id e inicia o pré-aquecimento com ele.
         public MicroOndasModel? IniciarPreAquecimento(int IdPreAquecimento)
         {
             try
@@ -91,6 +94,7 @@ namespace MicroondasMVC_Benner.Repository.MicroOndas
             } catch(RegraMicroOndasException) { throw; }
         }
 
+        // Pausa ou cancela a execução atual, dependendo do tempo/estado que chegar.
         public MicroOndasModel? PausarOuCancelar(int tempo)
         {
 

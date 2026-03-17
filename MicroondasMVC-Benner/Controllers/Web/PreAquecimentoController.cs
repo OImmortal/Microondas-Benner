@@ -1,4 +1,4 @@
-﻿using MicroondasMVC_Benner.Models.Microondas;
+using MicroondasMVC_Benner.Models.Microondas;
 using MicroondasMVC_Benner.Models.PreAquecimento;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -10,12 +10,14 @@ namespace MicroondasMVC_Benner.Controllers.Web
     {
 
         [HttpGet]
+        // Abre a tela de cadastro de pré-aquecimento.
         public IActionResult Cadastro()
         {
             return View();
         }
 
         [HttpPost]
+        // Valida e salva um pré-aquecimento novo (e também grava no JSON de presets).
         public IActionResult Cadastro(PreAquecimentoModel preAquecimento)
         {
             var microondas = MicroOndasController.microOndas;

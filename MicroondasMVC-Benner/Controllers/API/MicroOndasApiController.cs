@@ -1,4 +1,4 @@
-﻿using MicroondasMVC_Benner.Models.API;
+using MicroondasMVC_Benner.Models.API;
 using MicroondasMVC_Benner.Models.Microondas;
 using MicroondasMVC_Benner.Models.PreAquecimento;
 using MicroondasMVC_Benner.Repository;

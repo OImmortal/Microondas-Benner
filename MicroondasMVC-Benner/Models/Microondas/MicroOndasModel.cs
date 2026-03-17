@@ -1,4 +1,4 @@
-﻿using MicroondasMVC_Benner.Models.PreAquecimento;
+using MicroondasMVC_Benner.Models.PreAquecimento;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using NuGet.Packaging;
 using System.ComponentModel.DataAnnotations;
@@ -20,6 +20,7 @@ namespace MicroondasMVC_Benner.Models.Microondas
         private const int LIMITE_CONTADOR = 120;
         private string tempCaracterAquecimento = ".";
 
+        // Sobe o estado inicial do micro-ondas e carrega presets (fixos + os que vierem do JSON).
         public MicroOndasModel()
         {
             this.preAquecimentos = new List<PreAquecimentoModel>()
@@ -61,6 +62,7 @@ namespace MicroondasMVC_Benner.Models.Microondas
             }
         }
 
+        // Seleciona um preset e inicia o aquecimento já com tempo/potência e caractere dele.
         public void IniciarPreAquecimento(int idPreAquecimento)
         {
             var preAquecimentoSelecionado = preAquecimentos.FirstOrDefault(p => p.id == idPreAquecimento);
@@ -73,6 +75,7 @@ namespace MicroondasMVC_Benner.Models.Microondas
             PreAquecimentoActive = true;
         }
 
+        // Liga o micro-ondas (ou adiciona tempo/retoma se já estiver rodando/pausado).
         public void Iniciar(int contador, int potencia)
         {
 
@@ -109,6 +112,7 @@ namespace MicroondasMVC_Benner.Models.Microondas
             }
         }
 
+        // Se estiver rodando, pausa; se já estiver pausado (ou parado), aí cancela geral.
         public void PausarECancelar(int contador)
         {
             if (Ligado && !Pausado)
@@ -129,6 +133,7 @@ namespace MicroondasMVC_Benner.Models.Microondas
             }
         }
 
+        // Reseta tudo pro estado inicial (desliga, zera display e limpa os blocos).
         public void Cancelar()
         {
             Ligado = false;
@@ -143,6 +148,7 @@ namespace MicroondasMVC_Benner.Models.Microondas
             blocos.Clear();
         }
 
+        // Formata o tempo atual do display pra mm:ss.
         public string ObterTempoFormatado()
         {
             if (display != null)
@@ -154,12 +160,14 @@ namespace MicroondasMVC_Benner.Models.Microondas
             return "00:00";
         }
 
+        // Checa se o caractere já está sendo usado por algum preset (e bloqueia o "." que é o padrão).
         public bool ContainsCaracter(string caracter)
         {
             bool contains = preAquecimentos.Any(p => p.CaractereAquecimento == caracter) || caracter == ".";
             return contains;
         }
 
+        // Gera a lista de blocos (um por segundo) pra desenhar o “aquecendo” no display.
         private List<Blocos> gerarBloco(string caracter = "")
         {
             List<Blocos> blocosGerados = new List<Blocos>();

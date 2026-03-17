@@ -62,3 +62,7 @@ _ReSharper*/
 Thumbs.db
 *~
 *.swp
+
+# Env (segredos)
+*.env
+MicroondasMVC-Benner/Config/.env
