@@ -13,7 +13,6 @@ Aplicação web (MVC) e API em ASP.NET Core para simular um micro-ondas com cada
 - Swagger (Swashbuckle)
 - DotNetEnv
 - Bootstrap
-- jQuery
 
 ## Instalação e Uso
 1. Instale o **.NET SDK 8**.
